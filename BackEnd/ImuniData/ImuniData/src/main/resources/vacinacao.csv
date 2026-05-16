@@ -1,0 +1,8 @@
+municipio,estado,vacina,dose,quantidadeAplicada,dataRegistro
+São Paulo,SP,BCG,1ª dose,1500,2024-01-10
+Campinas,SP,Gripe,1ª dose,800,2024-02-15
+Salvador,BA,BCG,2ª dose,600,2024-03-01
+Fortaleza,CE,Gripe,Reforço,1200,2024-04-20
+Manaus,AM,Polio,1ª dose,950,2024-05-05
+Santos,SP,Hepatite B,1ª Dose,40,2026-05-03
+Curitiba,PR,BCG,2ª Dose,60,2026-05-04
