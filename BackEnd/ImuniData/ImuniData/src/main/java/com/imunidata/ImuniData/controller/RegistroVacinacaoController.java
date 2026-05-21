@@ -54,12 +54,11 @@ public class RegistroVacinacaoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        return service.buscarPorId(id)
-                .map(existente -> {
-                    service.deletar(id);
-                    return ResponseEntity.<Void>ok().build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    if (!service.existe(id)) {
+        return ResponseEntity.notFound().build();
     }
+    service.deletar(id);
+    return ResponseEntity.noContent().build();
+}
 }

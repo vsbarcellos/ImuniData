@@ -42,4 +42,7 @@ public class RegistroVacinacaoService {
         repository.deleteById(id);
     }
 
+    public boolean existe(Long id) {
+        return repository.existsById(id);
+    }
 }
