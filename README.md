@@ -31,6 +31,8 @@ Este é um sistema de monitoramento de vacinação desenvolvido com Java Spring 
 O `Optional` é usado no Service e no Controller para evitar que surja um `NullPointerException` ao buscar registros por ID. Em vez de retornar `null` quando um registro não existe, o `Optional` força o código a tratar explicitamente o caso de ausência — resultando no retorno correto de `404 Not Found` em vez de um erro inesperado.
 
 ## Prints
+
+<img width="1822" height="877" alt="image" src="https://github.com/user-attachments/assets/be0973c1-847b-44b7-b313-6acf1e1511a5" />
 <img width="844" height="486" alt="Captura de tela 2026-05-21 014131" src="https://github.com/user-attachments/assets/f60f53b7-a3ff-4d35-a5d6-df8eba87277e" />
 <img width="835" height="487" alt="Captura de tela 2026-05-21 014049" src="https://github.com/user-attachments/assets/50fabf16-dd90-49cd-80cb-7ffcaf2a9b2e" />
 <img width="842" height="392" alt="Captura de tela 2026-05-21 013932" src="https://github.com/user-attachments/assets/88167adc-b633-4bd6-8637-d8a970dcabae" />
