@@ -14,9 +14,9 @@ function App() {
     quantidadeAplicada: "",
     dataRegistro: "",
   });
-  const handleChange = (e) => {
+
+  const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = () => {
     axios.post(API, form).then((res) => {
@@ -31,6 +31,7 @@ function App() {
       });
     });
   };
+
   useEffect(() => {
     axios.get(API).then((res) => setRegistros(res.data));
   }, []);
@@ -42,89 +43,91 @@ function App() {
   );
 
   return (
-    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
-      <h1>ImuniData</h1>
-      <div
-        style={{
-          marginBottom: "1.5rem",
-          display: "flex",
-          gap: "0.5rem",
-          flexWrap: "wrap",
-        }}
-      >
-        <input
-          name="municipio"
-          placeholder="Município"
-          value={form.municipio}
-          onChange={handleChange}
-        />
-        <input
-          name="estado"
-          placeholder="Estado (ex: SP)"
-          value={form.estado}
-          onChange={handleChange}
-        />
-        <input
-          name="vacina"
-          placeholder="Vacina"
-          value={form.vacina}
-          onChange={handleChange}
-        />
-        <input
-          name="dose"
-          placeholder="Dose"
-          value={form.dose}
-          onChange={handleChange}
-        />
-        <input
-          name="quantidadeAplicada"
-          placeholder="Quantidade"
-          value={form.quantidadeAplicada}
-          onChange={handleChange}
-        />
-        <input
-          name="dataRegistro"
-          placeholder="Data (AAAA-MM-DD)"
-          value={form.dataRegistro}
-          onChange={handleChange}
-        />
-        <button onClick={handleSubmit}>Cadastrar</button>
-      </div>
-      <input
-        placeholder="Filtrar por vacina ou estado..."
-        value={filtro}
-        onChange={(e) => setFiltro(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem", width: "300px" }}
-      />
+    <div className="min-h-screen bg-gray-100 p-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold text-blue-700 mb-6">💉 ImuniData</h1>
 
-      <table
-        border="1"
-        cellPadding="8"
-        style={{ borderCollapse: "collapse", width: "100%" }}
-      >
-        <thead>
-          <tr>
-            <th>Município</th>
-            <th>Estado</th>
-            <th>Vacina</th>
-            <th>Dose</th>
-            <th>Qtd Aplicada</th>
-            <th>Data</th>
-          </tr>
-        </thead>
-        <tbody>
-          {registrosFiltrados.map((r) => (
-            <tr key={r.id}>
-              <td>{r.municipio}</td>
-              <td>{r.estado}</td>
-              <td>{r.vacina}</td>
-              <td>{r.dose}</td>
-              <td>{r.quantidadeAplicada}</td>
-              <td>{r.dataRegistro}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        {/* Formulário */}
+        <div className="bg-white rounded-xl shadow p-6 mb-6">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            Novo Registro
+          </h2>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            {[
+              "municipio",
+              "estado",
+              "vacina",
+              "dose",
+              "quantidadeAplicada",
+              "dataRegistro",
+            ].map((campo) => (
+              <input
+                key={campo}
+                name={campo}
+                placeholder={
+                  campo === "dataRegistro"
+                    ? "Data (AAAA-MM-DD)"
+                    : campo.charAt(0).toUpperCase() + campo.slice(1)
+                }
+                value={form[campo]}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+            ))}
+          </div>
+          <button
+            onClick={handleSubmit}
+            className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition"
+          >
+            Cadastrar
+          </button>
+        </div>
+
+        {/* Filtro */}
+        <input
+          placeholder="Filtrar por vacina ou estado..."
+          value={filtro}
+          onChange={(e) => setFiltro(e.target.value)}
+          className="w-full border border-gray-300 rounded-lg px-4 py-2 mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+
+        {/* Tabela */}
+        <div className="bg-white rounded-xl shadow overflow-hidden">
+          <table className="w-full text-sm text-left">
+            <thead className="bg-blue-600 text-white">
+              <tr>
+                {[
+                  "Município",
+                  "Estado",
+                  "Vacina",
+                  "Dose",
+                  "Qtd Aplicada",
+                  "Data",
+                ].map((h) => (
+                  <th key={h} className="px-4 py-3 font-semibold">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {registrosFiltrados.map((r, i) => (
+                <tr
+                  key={r.id}
+                  className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                >
+                  <td className="px-4 py-2">{r.municipio}</td>
+                  <td className="px-4 py-2">{r.estado}</td>
+                  <td className="px-4 py-2">{r.vacina}</td>
+                  <td className="px-4 py-2">{r.dose}</td>
+                  <td className="px-4 py-2">{r.quantidadeAplicada}</td>
+                  <td className="px-4 py-2">{r.dataRegistro}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }
